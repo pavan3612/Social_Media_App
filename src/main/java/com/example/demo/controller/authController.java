@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.configuration.jwtProvider;
 import com.example.demo.models.User;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.request.LoginRequest;
 import com.example.demo.response.AuthResponse;
-import com.example.demo.response.LoginRequest;
 import com.example.demo.service.CustomUserDetailsService;
 import com.example.demo.service.UserService;
 
@@ -31,8 +31,10 @@ public class authController {
     
     @Autowired
     private PasswordEncoder passwordEncoder; 
-	
+    
+	@Autowired
     private CustomUserDetailsService customUserDetails; 
+    
 	@PostMapping("/signUp")
 	public AuthResponse createUser(@RequestBody User user) throws Exception {
 		
@@ -82,39 +84,5 @@ public class authController {
 		return new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities()); 
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

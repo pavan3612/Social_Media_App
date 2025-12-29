@@ -13,8 +13,6 @@ import com.example.demo.repository.UserRepository;
 @Service
 public class ImplementingPostService implements PostService {
 
-
-    
 	@Autowired
 	PostRepository postRepository; 
 	
