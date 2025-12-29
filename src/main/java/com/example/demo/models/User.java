@@ -13,14 +13,37 @@ public class User {
 
     private String firstName;
     private String lastName;
-    private String mail;
+    public User() {
+    	
+    }
+    public User(int id, String firstName, String lastName, String mail, String password, List<Integer> followers,
+			List<Integer> followings, List<Post> savedPost, String gender) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.mail = mail;
+		this.password = password;
+		this.followers = followers;
+		this.followings = followings;
+		this.savedPost = savedPost;
+		this.gender = gender;
+	}
+    
+    private String gender; 
+	private String mail;
     private String password;
     private List<Integer> followers = new ArrayList<>(); 
     private List<Integer> followings = new ArrayList<>(); 
     
+    @ManyToMany
+    private List<Post> savedPost = new ArrayList<>(); 
+    
+    
     public List<Integer> getFollowers() {
 		return followers;
 	}
+    
 	public void setFollowers(List<Integer> followers) {
 		this.followers = followers;
 	}
@@ -37,9 +60,15 @@ public class User {
 		this.gender = gender;
 	}
 
-	private String gender; 
+	
 
-   
+	public List<Post> getSavedPost() {
+		return savedPost;
+	}
+	
+	public void setSavedPost(List<Post> savedPost) {
+		this.savedPost = savedPost;
+	}
     // Getters and Setters
     public int getId() {
         return id;
@@ -76,7 +105,4 @@ public class User {
         this.password = password;
     }
     
-    public void FullName() {
-    	  String k = "pavanteja "; 
-    }
 }
