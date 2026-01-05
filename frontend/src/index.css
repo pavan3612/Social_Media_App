@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optional: Add this to ensure the dark theme covers the whole page */
+body {
+  margin: 0;
+  background-color: #111827; /* Matches bg-gray-900 */
+}
