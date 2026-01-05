@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.pavan </groupId>
-	<artifactId>My_APP</artifactId>
+	<artifactId>LearnInstaApp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>My_APP</name>
+	<name>LearnInstaApp</name>
 	<description>Pavans-my-app</description>
 	<url/>
 	<licenses>
@@ -92,10 +92,20 @@
 </dependencies>
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>com.example.demo.MyAppApplication</mainClass>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 
