@@ -183,4 +183,123 @@ const ProfilePage = () => {
   );
 };
 
+
+// ... (EditProfileModal remains exactly the same as previous steps) ...
+const EditProfileModal = ({ user, onClose, onUpdate }) => {
+    const [firstName, setFirstName] = useState(user.firstName || "");
+    const [lastName, setLastName] = useState(user.lastName || "");
+    const [imageFile, setImageFile] = useState(null);
+    const [preview, setPreview] = useState(user.image || null);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setImageFile(file);
+            setPreview(URL.createObjectURL(file));
+        }
+    };
+
+    const uploadToCloudinary = async (file) => {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", "LearnInsta"); 
+        formData.append("cloud_name", "dhkcvghi7"); 
+    
+        try {
+          const res = await axios.post(
+            `https://api.cloudinary.com/v1_1/dhkcvghi7/image/upload`,
+            formData
+          );
+          return res.data.secure_url;
+        } catch (error) {
+          console.error("Cloudinary Upload Error:", error);
+          throw error;
+        }
+    };
+
+    const handleSubmit = async () => {
+        setIsLoading(true);
+        try {
+            let imageUrl = user.image; 
+
+            if (imageFile) {
+                imageUrl = await uploadToCloudinary(imageFile);
+            }
+
+            const updateData = {
+                firstName: firstName,
+                lastName: lastName,
+                image: imageUrl
+            };
+
+            await api.put("/api/user/edit", updateData);
+            
+            alert("Profile Updated Successfully!");
+            onUpdate(); 
+            onClose();  
+
+        } catch (error) {
+            console.error("Error updating profile:", error);
+            alert("Failed to update profile.");
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    return (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+            <div className="bg-gray-900 p-6 rounded-xl w-[90%] max-w-md border border-gray-800">
+                <h2 className="text-xl font-bold mb-4 text-white">Edit Profile</h2>
+                
+                <div className="flex flex-col gap-4">
+                    <div className="flex flex-col items-center gap-2">
+                        <div className="w-20 h-20 rounded-full bg-gray-700 overflow-hidden border-2 border-blue-500">
+                            {preview ? (
+                                <img src={preview} alt="Preview" className="w-full h-full object-cover" />
+                            ) : (
+                                <div className="w-full h-full flex items-center justify-center text-2xl font-bold">{firstName[0]}</div>
+                            )}
+                        </div>
+                        <label className="text-blue-400 text-sm cursor-pointer hover:underline">
+                            Change Profile Photo
+                            <input type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
+                        </label>
+                    </div>
+
+                    <div>
+                        <label className="text-gray-400 text-sm">First Name</label>
+                        <input 
+                            type="text" 
+                            value={firstName} 
+                            onChange={(e) => setFirstName(e.target.value)}
+                            className="w-full bg-gray-800 text-white p-2 rounded mt-1 focus:outline-none focus:border-blue-500 border border-gray-700"
+                        />
+                    </div>
+                    <div>
+                        <label className="text-gray-400 text-sm">Last Name</label>
+                        <input 
+                            type="text" 
+                            value={lastName} 
+                            onChange={(e) => setLastName(e.target.value)}
+                            className="w-full bg-gray-800 text-white p-2 rounded mt-1 focus:outline-none focus:border-blue-500 border border-gray-700"
+                        />
+                    </div>
+                </div>
+
+                <div className="flex justify-end gap-3 mt-6">
+                    <button onClick={onClose} className="px-4 py-2 text-gray-400 hover:text-white">Cancel</button>
+                    <button 
+                        onClick={handleSubmit} 
+                        disabled={isLoading}
+                        className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded font-bold disabled:opacity-50"
+                    >
+                        {isLoading ? "Saving..." : "Save"}
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 export default ProfilePage;
