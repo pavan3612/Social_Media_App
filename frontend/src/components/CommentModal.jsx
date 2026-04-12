@@ -60,7 +60,7 @@ const CommentModal = ({ postId, onClose }) => {
                     <div key={comment.id} className="flex gap-3">
                          <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center font-bold text-xs text-white shrink-0 overflow-hidden">
                             {comment.user?.image ? (
-                                <img src={comment.user.image} className="w-full h-full object-cover"/>
+                                <img src={comment.user.image} className="w-full h-full object-cover" alt="Post"/>
                             ) : (
                                 comment.user?.firstName?.[0]
                             )}
