@@ -29,7 +29,7 @@ const MiddlePart = ({ user, setUser, posts, setPosts, setIsPostModalOpen }) => {
   const handleSavePost = async (postId) => {
     try {
         // 1. Call API
-        const { data } = await api.put(`/api/posts/save/${postId}`);
+        //const { data } = await api.put(`/api/posts/save/${postId}`);
         
         // 2. Update User State (Because saved posts are stored in User, not Post)
         if (user) {
