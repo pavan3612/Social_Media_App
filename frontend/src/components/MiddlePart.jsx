@@ -78,7 +78,7 @@ const MiddlePart = ({ user, setUser, posts, setPosts, setIsPostModalOpen }) => {
            <div className="bg-gray-900 rounded-xl p-4 border border-gray-800">
                <div className="flex gap-4 items-center mb-4">
                     <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center font-bold text-white overflow-hidden">
-                        {user?.image ? <img src={user.image} className="w-full h-full object-cover"/> : user?.firstName?.[0]}
+                        {user?.image ? <img src={user.image} className="w-full h-full object-cover" alt="user" /> : user?.firstName?.[0]}
                     </div>
                     <input 
                         type="text" 
