@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const API_BASE_URL = "http://3.93.46.35:8080";
+export const API_BASE_URL = "https://dynamic-trust-production-80d2.up.railway.app/";
 
 const api = axios.create({
   baseURL: API_BASE_URL,
