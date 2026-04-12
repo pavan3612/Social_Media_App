@@ -26,7 +26,7 @@ const CreatePostModal = ({ onClose }) => {
     formData.append("cloud_name", "dhkcvghi7"); // REPLACE with your cloud name
 
     // Determine if it's image or video for the endpoint
-    const resourceType = file.type.startsWith("video/") ? "video" : "image";
+    //const resourceType = file.type.startsWith("video/") ? "video" : "image";
     
     try {
       const res = await axios.post(
