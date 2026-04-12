@@ -121,7 +121,7 @@ const MiddlePart = ({ user, setUser, posts, setPosts, setIsPostModalOpen }) => {
                   {/* Header */}
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center font-bold text-white cursor-pointer overflow-hidden">
-                      {post.user?.image ? <img src={post.user.image} className="w-full h-full object-cover"/> : post.user?.firstName?.[0]}
+                      {post.user?.image ? <img src={post.user.image} alt="User Profile"className="w-full h-full object-cover"/> : post.user?.firstName?.[0]}
                     </div>
                     <div>
                       <h3 className="font-semibold text-sm cursor-pointer hover:underline text-white">
