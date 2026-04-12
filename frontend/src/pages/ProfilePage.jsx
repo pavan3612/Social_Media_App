@@ -26,7 +26,7 @@ const ProfilePage = () => {
 
   useEffect(() => {
     fetchProfileData();
-  }, [id]); // Re-run if ID changes
+  }, [fetchProfileData]); // Re-run if ID changes
 
   const fetchProfileData = async () => {
     try {
